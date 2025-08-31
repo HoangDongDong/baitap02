@@ -20,6 +20,7 @@ public class UserDaoImpl implements UserDao {
 			conn = new DBConnection().getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
+			System.out.print(false);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -39,6 +40,70 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public void insert(User user) {
+		String sql = "INSERT INTO [Users](email, username, fullname, password, avatar, roleid, phone, createddate,id) VALUES (?,?,?,?,?,?,?,?,?)";
+		try {
+			System.out.print("ok");
+			conn = new DBConnection().getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, user.getEmail());
+			ps.setString(2, user.getUserName());
+			ps.setString(3, user.getFullName());
+			ps.setString(4, user.getPassWord());
+			ps.setString(5, user.getAvatar());
+			ps.setInt(6, user.getRoleid());
+			ps.setString(7, user.getPhone());
+			ps.setString(8, user.getCreatedDate());
+			ps.setInt(9, user.getId());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public boolean checkExistEmail(String email) {
+		String sql = "SELECT 1 FROM [Users] WHERE email = ?";
+		try (Connection conn = new DBConnection().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setString(1, email);
+			try (ResultSet rs = ps.executeQuery()) {
+				return rs.next();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean checkExistUsername(String username) {
+		String sql = "SELECT 1 FROM [Users] WHERE username = ?";
+		try (Connection conn = new DBConnection().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setString(1, username);
+			try (ResultSet rs = ps.executeQuery()) {
+				return rs.next();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean checkExistPhone(String phone) {
+		String sql = "SELECT 1 FROM [Users] WHERE phone = ?";
+		try (Connection conn = new DBConnection().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setString(1, phone);
+			try (ResultSet rs = ps.executeQuery()) {
+				return rs.next();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }

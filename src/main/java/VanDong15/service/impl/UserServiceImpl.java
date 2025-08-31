@@ -1,5 +1,7 @@
 package VanDong15.service.impl;
 
+import java.util.Random;
+
 import VanDong15.dao.UserDao;
 import VanDong15.dao.Impl.UserDaoImpl;
 import models.User;
@@ -16,8 +18,54 @@ public class UserServiceImpl implements UserService {
 		}
 		return null;
 	}
+
 	@Override
 	public User get(String username) {
-	return userDao.get(username);
+		return userDao.get(username);
+
 	}
+
+	@Override
+	public void insert(User user) {
+		userDao.insert(user);
+	}
+
+	@Override
+	public boolean register(String email, String password, String username, String fullname, String phone) {
+		if (userDao.checkExistUsername(username)) {
+			return false;
+		}
+		long millis = System.currentTimeMillis();
+		java.sql.Date date = new java.sql.Date(millis);
+		String strDate = date.toString();
+		User us = new User();
+		 Random rand = new Random();
+		us.setId(rand.nextInt(10000));
+		us.setEmail(email);
+		us.setUserName(username);
+		us.setFullName(fullname);
+		us.setPassWord(password);
+		us.setAvatar("avt0");
+		us.setRoleid(1);
+		us.setPhone(phone);
+		us.setCreatedDate(strDate);
+		userDao.insert(us);
+		return true;
+	}
+
+	@Override
+	public boolean checkExistEmail(String email) {
+		return userDao.checkExistEmail(email);
+	}
+
+	@Override
+	public boolean checkExistUsername(String username) {
+		return userDao.checkExistUsername(username);
+	}
+
+	@Override
+	public boolean checkExistPhone(String phone) {
+		return userDao.checkExistPhone(phone);
+	}
+
 }

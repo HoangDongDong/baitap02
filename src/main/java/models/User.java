@@ -2,6 +2,7 @@ package models;
 
 import java.io.Serializable;
 import java.sql.Date;
+@SuppressWarnings("serial")
 public class User implements Serializable{
 
 	/**
