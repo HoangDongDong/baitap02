@@ -30,41 +30,48 @@
 </head>
 <body>
 
-<div class="login-container">
-    <h2>Đăng nhập tài khoản</h2>
+	<div class="login-container">
+		<h2>Đăng nhập tài khoản</h2>
 
-    <!-- Thông báo lỗi nếu có -->
-    <c:if test="${alert != null}">
-        <div class="alert alert-danger">${alert}</div>
-    </c:if>
+		<!-- Thông báo lỗi nếu có -->
+		<c:if test="${alert != null}">
+			<div class="alert alert-danger">${alert}</div>
+		</c:if>
 
-    <!-- Form đăng nhập -->
-    <form action="${pageContext.request.contextPath}/login" method="post">
-        <div class="form-group">
-            <label for="username">Tài khoản:</label>
-            <input type="text" id="username" name="username" class="form-control" placeholder="Nhập tài khoản">
-        </div>
+		<!-- Form đăng nhập -->
+		<form action="${pageContext.request.contextPath}/login" method="post">
+			<div class="form-group">
+				<label for="username">Tài khoản:</label> <input type="text"
+					id="username" name="username" class="form-control"
+					placeholder="Nhập tài khoản">
+			</div>
 
-        <div class="form-group">
-            <label for="password">Mật khẩu:</label>
-            <input type="password" id="password" name="password" class="form-control" placeholder="Nhập mật khẩu">
-        </div>
+			<div class="form-group">
+				<label for="password">Mật khẩu:</label> <input type="password"
+					id="password" name="password" class="form-control"
+					placeholder="Nhập mật khẩu">
+			</div>
 
-        <div class="checkbox remember-me">
-            <label>
-                <input type="checkbox" name="remember"> Ghi nhớ đăng nhập
-            </label>
-        </div>
+			<div class="checkbox remember-me">
+				<label> <input type="checkbox" name="remember"> Ghi
+					nhớ đăng nhập
+				</label>
+			</div>
 
-        <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
-    </form>
+			<button type="submit" class="btn btn-primary btn-block">Đăng
+				nhập</button>
+		</form>
 
-    <hr>
-    <p class="text-center">
-        Chưa có tài khoản? 
-        <a href="${pageContext.request.contextPath }/register">Đăng ký ngay</a>
-    </p>
-</div>
+		<hr>
+		<p class="text-center">
+			Chưa có tài khoản? <a
+				href="${pageContext.request.contextPath }/register">Đăng ký ngay</a>
+		</p>
+		<p class="text-center">
+			<a href="${pageContext.request.contextPath}/forgot">Quên mật
+				khẩu?</a>
+		</p>
+	</div>
 
 </body>
 </html>

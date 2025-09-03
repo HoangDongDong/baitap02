@@ -106,4 +106,16 @@ public class UserDaoImpl implements UserDao {
 		return false;
 	}
 
+	@Override
+	public void updatePassword(String username, String newPassword) {
+		String sql = "UPDATE [Users] SET password = ? WHERE username = ?";
+		try (Connection conn = new DBConnection().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+			ps.setString(1, newPassword);
+			ps.setString(2, username);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 }

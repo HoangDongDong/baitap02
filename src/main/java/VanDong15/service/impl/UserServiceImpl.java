@@ -67,5 +67,11 @@ public class UserServiceImpl implements UserService {
 	public boolean checkExistPhone(String phone) {
 		return userDao.checkExistPhone(phone);
 	}
-
+	@Override
+	public boolean updatePassword(String username, String newPassword) {
+		User u = this.get(username);
+	    if (u == null) return false;
+	    userDao.updatePassword(username, newPassword);
+	    return true;
+	}
 }
